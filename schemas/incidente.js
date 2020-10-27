@@ -1,5 +1,5 @@
-// const mongoose  = require('mongoose'); 
-// const Schema    = mongoose.Schema;
+const mongoose  = require('mongoose'); 
+const Schema    = mongoose.Schema;
 
 const incidenteSchema = new Schema({
     titulo: {
@@ -14,12 +14,12 @@ const incidenteSchema = new Schema({
         type: String
     },
     longitud: {
-        type: Float32Array,
+        type: String,
         required: [true,'Longitud requerida'],
     },
-    longitud: {
-        type: Float32Array,
-        required: [true,'Longitud requerida'],
+    latitud: {
+        type: String,
+        required: [true,'Latitud requerida'],
     },
     fecha: {
         type: Date,
