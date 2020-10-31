@@ -3,6 +3,7 @@ const app = express();
 const RestError = require('./rest-error');
 const mongoose = require('mongoose'); 
 
+const usuario = require('./routes/usuario');
 const incidente = require('./routes/incidente');
 
 //require('dotenv').config(); 
@@ -30,6 +31,7 @@ mongoose.connection.on('error', error => {
 
 app.use(express.json());
 app.use(incidente);
+app.use(usuario);
 
 app.use((err,req,res,next) => {
     res.status(err instanceof RestError? err.status: 500);

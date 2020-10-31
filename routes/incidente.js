@@ -8,8 +8,8 @@ const incidente = mongoose.model('Incidente', incidenteSchema);
 
 // CREAR INCIDENTE
 Router.post('/incidentes', function (req, res, next) {
-
     Inc = new incidente(req.body);
+    
     Inc.save(function (err, inc) {
         if (err) {
             if (err.code == 11000) {
