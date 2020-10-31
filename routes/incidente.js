@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const RestError = require('../rest-error');
 const Router = express.Router();
 
-const Incidente = require('../schemas/incidente');
 const incidenteSchema = require('../schemas/incidente');
+const incidente = mongoose.model('Incidente', incidenteSchema);
 
 // CREAR INCIDENTE
-const incidente = mongoose.model('Incidente', incidenteSchema);
 Router.post('/incidentes', function (req, res, next) {
 
     Inc = new incidente(req.body);
@@ -26,6 +25,18 @@ Router.post('/incidentes', function (req, res, next) {
                 next(new RestError(errors, 400));
             }
         } else {
+            inc.__v = undefined;
+            res.json(inc);
+        }
+    });
+});
+
+// OBTENER INCIDENTE por ID
+Router.get('/incidentes/:id', function (req, res) {
+    const id = req.params.id;
+    Query = incidente.findById(id)
+    Query.exec(function (err, inc) {
+        if (!err) {
             inc.__v = undefined;
             res.json(inc);
         }
