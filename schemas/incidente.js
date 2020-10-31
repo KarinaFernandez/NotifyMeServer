@@ -30,7 +30,6 @@ const incidenteSchema = new Schema({
             },
             message: props => `${props.value} la fecha no es valida. Fecha menor a fecha actual`
         }
-
     }
 });
 

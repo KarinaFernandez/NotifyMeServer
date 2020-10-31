@@ -7,9 +7,10 @@ const Incidente = require('../schemas/incidente');
 const incidenteSchema = require('../schemas/incidente');
 
 // CREAR INCIDENTE
-    
+const incidente = mongoose.model('Incidente', incidenteSchema);
 Router.post('/incidentes', function (req, res, next) {
-    Inc = new Incidente(req.body);
+
+    Inc = new incidente(req.body);
 
     Inc.save(function (err, inc) {
         if (err) {
@@ -25,12 +26,7 @@ Router.post('/incidentes', function (req, res, next) {
                 next(new RestError(errors, 400));
             }
         } else {
-            inc.titulo = undefined;
-            inc.tipo = undefined;
-            inc.imagenUrl = undefined;
-            inc.longitud = undefined;
-            inc.latitud = undefined;
-            inc.fecha = undefined;
+            inc.__v = undefined;
             res.json(inc);
         }
     });

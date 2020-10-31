@@ -8,7 +8,7 @@ const incidente = require('./routes/incidente');
 //require('dotenv').config(); 
 
 // Conectar a DB local
-const uri = 'mongodb://localhost:27017/db';
+const uri = 'mongodb://localhost:27017/incidentes';
 const options = {useUnifiedTopology:true, useNewUrlParser:true};
 mongoose.connect(uri,options); 
 
