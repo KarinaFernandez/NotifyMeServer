@@ -27,11 +27,15 @@ const usuarioSchema = new Schema({
         type: Boolean,
         default: true
     }
-    // ,
-    // incidentes: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Incidente'
-    // }]
+    ,
+    incidentes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Incidente'
+    }],
+    admin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = usuarioSchema;
