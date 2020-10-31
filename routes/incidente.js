@@ -32,14 +32,13 @@ Router.post('/incidentes', function (req, res, next) {
 
 // OBTENER TODOS LOS INCIDENTES
 Router.get('/incidentes', function (req, res) {
-    incidente.find({}, function(err, incidentes) {
-        var incidenteMap = {};
-    
-        incidentes.forEach(function(inc) {
-            incidenteMap[inc._id] = inc;
-        });
-        res.send(incidenteMap);  
-      });
+    incidente.find({}, (err, incidentes) =>
+        res.send(incidentes.reduce((incidenteMap, inc) => {
+            inc.__v = undefined;
+            incidenteMap[inc.id] = inc
+            return incidenteMap
+        }, {})),
+    )
 });
 
 // OBTENER INCIDENTE por ID
