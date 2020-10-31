@@ -10,7 +10,6 @@ const incidente = mongoose.model('Incidente', incidenteSchema);
 Router.post('/incidentes', function (req, res, next) {
 
     Inc = new incidente(req.body);
-
     Inc.save(function (err, inc) {
         if (err) {
             if (err.code == 11000) {
@@ -29,6 +28,18 @@ Router.post('/incidentes', function (req, res, next) {
             res.json(inc);
         }
     });
+});
+
+// OBTENER TODOS LOS INCIDENTES
+Router.get('/incidentes', function (req, res) {
+    incidente.find({}, function(err, incidentes) {
+        var incidenteMap = {};
+    
+        incidentes.forEach(function(inc) {
+            incidenteMap[inc._id] = inc;
+        });
+        res.send(incidenteMap);  
+      });
 });
 
 // OBTENER INCIDENTE por ID
