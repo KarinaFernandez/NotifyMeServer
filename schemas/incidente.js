@@ -23,14 +23,18 @@ const incidenteSchema = new Schema({
     },
     fecha: {
         type: Date,
-        required: [true,'Fecha requerida'],
+        required: [true,'Fecha requerida']
+    },
+    validado: {
+        type: Number,
+        default: 0,
         validate: {
-            validator : function(value){
-                return value < Date.now();
+            validator : function(value) {
+                return value >= 0;
             },
-            message: props => `${props.value} la fecha no es valida. Fecha menor a fecha actual`
+            message: props => `Llego al minimo de validaciones para un incidente`
         }
-    }
+    },
 });
 
 module.exports = incidenteSchema;
