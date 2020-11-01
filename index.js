@@ -38,6 +38,10 @@ app.use((err,req,res,next) => {
     res.json({error:err.message});
 });
 
+
+process.env.CADUCIDAD_TOKEN = '48h';
+process.env.SEED_AUTENTICACION = process.env.SEED_AUTENTICACION ||  'este-es-el-seed-desarrollo';
+
 app.listen(3000, function () {
     console.log('Escuchando puerto 3000');
 })

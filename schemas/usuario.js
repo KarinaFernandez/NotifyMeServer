@@ -38,4 +38,13 @@ const usuarioSchema = new Schema({
     }
 });
 
+// elimina la key password del objeto que retorna al momento de crear un usuario
+usuarioSchema.methods.toJSON = function() {
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.contraseña;
+    delete userObject.__v;
+    return userObject;
+ }
+
 module.exports = usuarioSchema;

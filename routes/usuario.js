@@ -8,31 +8,6 @@ const jwt = require('jsonwebtoken');
 const usuarioSchema = require('../schemas/usuario');
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 
-// CREAR USUARIO
-Router.post('/usuarios', function (req, res, next) {
-    Usr = new Usuario(req.body);
-
-    Usr.save(function (err, usuario) {
-        if (err) {
-            if (err.code == 11000) {
-                next(new RestError(err.message, 409));
-            } else {
-                errors = {};
-                for (const key in err.errors) {
-                    if (err.errors[key].constructor.name != 'ValidationError') {
-                        errors[key] = err.errors[key].message;
-                    }
-                }
-                next(new RestError(errors, 400));
-            }
-        } else {
-            usuario.__v = undefined;
-            usuario.contraseña = undefined;
-            res.json(usuario);
-        }
-    });
-});
-
 // REGISTRO USUARIO
 Router.post('/registro', function (req, res, next) {
     let { nombre, apellido, email, contraseña, admin } = req.body;
@@ -62,28 +37,25 @@ Router.post('/registro', function (req, res, next) {
 });
 
 // LOGIN
-Router.post('/login', function (req, res) {
+Router.post('/login', function (req, res, next) {
     let body = req.body;
     Usuario.findOne({ email: body.email }, (erro, usuarioDB) => {
         if (erro) {
             return res.status(500).json({
-                ok: false,
                 err: erro
             })
         }
         // Verifica que exista un usuario con el mail escrita por el usuario.
         if (!usuarioDB) {
             return res.status(400).json({
-                ok: false,
                 err: {
                     message: "Usuario o contraseña incorrectos"
                 }
             })
         }
         // Valida que la contraseña escrita por el usuario, sea la almacenada en la db
-        if (!bcrypt.compareSync(body.contraseña, usuarioDB.contraseña)) {
+        if (!bcrypt.compare(body.contraseña, usuarioDB.contraseña)) {
             return res.status(400).json({
-                ok: false,
                 err: {
                     message: "Usuario o contraseña incorrectos"
                 }
@@ -96,7 +68,6 @@ Router.post('/login', function (req, res) {
             expiresIn: process.env.CADUCIDAD_TOKEN
         })
         res.json({
-            ok: true,
             usuario: usuarioDB,
             token,
         })
