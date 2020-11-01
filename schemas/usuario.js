@@ -26,8 +26,7 @@ const usuarioSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
-    ,
+    },
     incidentes: [{
         type: Schema.Types.ObjectId,
         ref: 'Incidente'

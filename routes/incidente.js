@@ -53,7 +53,7 @@ Router.get('/incidentes/:id', function (req, res) {
     });
 });
 
-// ACTUALIZAR INCIDENTE (Validar / Invalidar)
+// ACTUALIZAR INCIDENTE (Validar / Deshabilitar)
 Router.put('/incidentes/:id', function (req, res, next) {
     const id = req.params.id;
     incidente.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }, function (err, incidente) {
