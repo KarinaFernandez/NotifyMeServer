@@ -9,14 +9,12 @@ const incidente = require('./routes/incidente');
 //require('dotenv').config(); 
 
 // Conectar a DB local
-const uri = 'mongodb://localhost:27017/incidentes';
-const options = {useUnifiedTopology:true, useNewUrlParser:true};
-mongoose.connect(uri,options); 
+// const uri = 'mongodb://localhost:27017/incidentes';
+// const options = {useUnifiedTopology:true, useNewUrlParser:true};
+// mongoose.connect(uri,options); 
 
-/*
 const uri = process.env.MONGODB_URI;
 const options = {useNewUrlParser:true, useUnifiedTopology: true}; 
-*/
 
 //Evento
 mongoose.connect(uri, options).catch(error => {
@@ -42,10 +40,12 @@ app.use((err,req,res,next) => {
 process.env.CADUCIDAD_TOKEN = '48h';
 process.env.SEED_AUTENTICACION = process.env.SEED_AUTENTICACION ||  'este-es-el-seed-desarrollo';
 
+/* Levanta Local
 app.listen(3000, function () {
     console.log('Escuchando puerto 3000');
 })
+*/
 
-// app.listen(process.env.PORT, function(){
-//     console.log(`Escuchando puerto ${process.env.PORT}`);
-// });
+app.listen(process.env.PORT, function(){
+    console.log(`Escuchando puerto ${process.env.PORT}`);
+});
