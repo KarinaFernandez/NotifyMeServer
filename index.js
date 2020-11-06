@@ -14,18 +14,17 @@ require('dotenv').config();
 // mongoose.connect(uri,options); 
 
 const uri = process.env.MONGODB_URI;
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
+const options = {useNewUrlParser:true, useUnifiedTopology: true}; 
 
 //Evento
 mongoose.connect(uri, options).catch(error => {
     console.log('Hubo un error de conexión', error.message);
-});
+}); 
 
-const conn = mongoose.connection;
-//Error de conexion
-mongoose.connection.on('error', error => {
-    console.log('Hubo un error de conexión', error.message);
-});
+// const conn = mongoose.connection;
+// mongoose.connection.on('error', error => {
+//  console.log('Hubo un error de conexión', error.message);
+// });
 
 app.use(express.json());
 app.use(incidente);
@@ -49,6 +48,6 @@ app.listen(3000, function () {
 // app.listen(process.env.PORT, function () {
 //     console.log(`Conectado a ${process.env.PORT}`);
 // }); 
-app.listen(process.env.PORT, process.env.HOST, function() {
-    console.log("Server started.......");
-});
+app.listen(process.env.PORT, function(){
+    console.log(`Conectado a ${process.env.PORT}`);
+}); 
