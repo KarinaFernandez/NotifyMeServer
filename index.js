@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const RestError = require('./rest-error');
 const mongoose = require('mongoose'); 
+var cors = require('cors');
 
 const usuario = require('./routes/usuario');
 const incidente = require('./routes/incidente');
@@ -28,6 +29,7 @@ mongoose.connection.on('error', error => {
 }); 
 
 app.use(express.json());
+app.use(cors());
 app.use(incidente);
 app.use(usuario);
 
