@@ -31,7 +31,7 @@ Router.post('/incidentes', function (req, res, next) {
 
 // OBTENER TODOS LOS INCIDENTES
 Router.get('/incidentes', function (req, res) {
-    Query = Incidente.find({}).populate('usuario');
+    Query = Incidente.find({}).populate('usuario', '-__v', 'incidentes');
 
     Query.exec(function (err, incidentes) {
         if (!err) {
@@ -46,24 +46,6 @@ Router.get('/incidentes', function (req, res) {
             next(new RestError(errors, 400));
         }
     })
-
-    /*
-    Incidente
-        .find({})
-        .populate('usuario')
-        .exec((err, inc) => {
-            if (err) return handleError(err);
-            return inc
-        });
-    */
-
-    // incidente.find({}, (err, incidentes) =>
-    //     res.send(incidentes.reduce((incidenteMap, inc) => {
-    //         inc.__v = undefined;
-    //         incidenteMap[inc.id] = inc
-    //         return incidenteMap
-    //     }, {})),
-    // )
 });
 
 // OBTENER INCIDENTE por ID
