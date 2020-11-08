@@ -38,7 +38,7 @@ Router.get('/incidentes', function (req, res) {
             incidenteMap[inc.id] = inc
             return incidenteMap
         }, {})),
-    )
+    ).populate('usuarios')
 });
 
 // OBTENER INCIDENTE por ID
