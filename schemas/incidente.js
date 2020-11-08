@@ -38,6 +38,11 @@ const incidenteSchema = new Schema({
     habilitado: {
         type: Boolean,
         default: true
+    },
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: [true, 'Usuario requerido']
     }
 });
 
