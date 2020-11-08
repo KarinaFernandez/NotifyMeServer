@@ -31,7 +31,7 @@ Router.post('/incidentes', function (req, res, next) {
 
 // OBTENER TODOS LOS INCIDENTES
 Router.get('/incidentes', function (req, res) {
-    Query = Incidente.find({}).populate('usuario', '-__v', '-incidentes');
+    Query = Incidente.find({}).populate('usuario', '-__v');
 
     Query.exec(function (err, incidentes) {
         if (!err) {
