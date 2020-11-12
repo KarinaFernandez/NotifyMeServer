@@ -51,6 +51,25 @@ Router.post('/login', function (req, res, next) {
     });
 });
 
+// OBTENER TODOS LOS USUARIOS
+Router.get('/usuarios', function (req, res) {
+    Query = Usuario.find({});
+
+    Query.exec(function (err, usuarios) {
+        if (!err) {
+            res.json(usuarios);
+        } else {
+            errors = {};
+            for (const key in err.errors) {
+                if (err.errors[key].constructor.name != 'ValidationError') {
+                    errors[key] = err.errors[key].message;
+                }
+            }
+            next(new RestError(errors, 400));
+        }
+    })
+});
+
 // OBTENER USUARIO por ID
 Router.get('/usuarios/:id', function (req, res) {
     const id = req.params.id;
