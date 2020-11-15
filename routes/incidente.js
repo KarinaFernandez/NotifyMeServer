@@ -23,9 +23,17 @@ Router.post('/incidentes', function (req, res, next) {
                 next(new RestError(errors, 400));
             }
         } else {
-            inc.__v = undefined;
-            inc.populate('usuario', '-__v');
-            res.json(inc);
+            // inc.__v = undefined;
+            // res.json(inc);
+
+            id = inc._id
+            Query = Incidente.findById(id).populate('usuario', '-__v');
+            Query.exec(function (err, inc) {
+                if (!err) {
+                    inc.__v = undefined;
+                    res.json(inc);
+                }
+            });
         }
     });
 });
