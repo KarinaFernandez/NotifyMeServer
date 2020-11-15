@@ -24,6 +24,7 @@ Router.post('/incidentes', function (req, res, next) {
             }
         } else {
             inc.__v = undefined;
+            inc.populate('usuario', '-__v');
             res.json(inc);
         }
     });
