@@ -31,7 +31,7 @@ Router.post('/registro', function (req, res, next) {
                 next(new RestError(errors, 400));
             }
         } else {
-            res.json({ usr });
+            res.json( usr );
         }
     })
 });
@@ -44,7 +44,7 @@ Router.post('/login', function (req, res, next) {
 
     Usuario.findOne({ email: email, contraseña: contraseña }, function (err, doc) {
         if (doc) {
-            res.json({ doc });
+            res.json(doc);
         } else {
             next(new RestError('Usuario o Contraseña invalidos', 401));
         }
