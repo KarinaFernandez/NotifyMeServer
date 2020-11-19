@@ -54,7 +54,6 @@ Router.post('/login', function (req, res, next) {
 // OBTENER TODOS LOS USUARIOS
 Router.get('/usuarios', function (req, res) {
     Query = Usuario.find({});
-
     Query.exec(function (err, usuarios) {
         if (!err) {
             res.json(usuarios);
