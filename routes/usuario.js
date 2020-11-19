@@ -73,14 +73,14 @@ Router.get('/usuarios', function (req, res) {
 Router.get('/usuarios/:id', function (req, res) {
     const id = req.params.id;
     Query = Usuario.findById(id)
-    Query.exec(function (err, usuario) {
+    Query.exec(function (err, usr) {
         if (!err) {
-            usuarios.contraseña = undefined
-            res.json(usuario);
+            usr.__v = undefined;
+            res.json(usr);
         }
     });
 });
-
+ 
 // ACTUALIZAR USUARIO (Desactivar)
 Router.put('/usuarios/:id', function (req, res, next) {
     const id = req.params.id;
