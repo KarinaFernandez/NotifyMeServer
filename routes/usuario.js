@@ -107,4 +107,24 @@ Router.put('/usuarios/:id', function (req, res, next) {
     });
 });
 
+// OBTENER INCIDENTES DE UN USUARIO
+Router.get('/incidentes/usuarios', function (req, res, next) {
+    const id = req.query.id;
+    Query = Usuario.findById(id).populate('incidentes', '-__v')
+
+    Query.exec(function (err, usuario) {
+        if (!err) {
+            res.json(usuario);
+        } else {
+            errors = {};
+            for (const key in err.errors) {
+                if (err.errors[key].constructor.name != 'ValidationError') {
+                    errors[key] = err.errors[key].message;
+                }
+            }
+            next(new RestError(errors, 400));
+        }
+    });
+});
+
 module.exports = Router;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const incidenteSchema = require('./incidente');
 const Schema = mongoose.Schema;
 
 const usuarioSchema = new Schema({
