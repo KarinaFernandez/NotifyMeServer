@@ -110,7 +110,7 @@ Router.put('/usuarios/:id', function (req, res, next) {
 // OBTENER INCIDENTES DE UN USUARIO
 Router.get('/incidentes/usuarios', function (req, res, next) {
     const id = req.query.id;
-    Query = Usuario.findById(id).populate('incidentes', '-__v')
+    Query = Usuario.findById(id)
 
     Query.exec(function (err, usuario) {
         if (!err) {
