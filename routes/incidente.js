@@ -82,7 +82,7 @@ Router.put('/incidentes/:id', function (req, res, next) {
                 next(new RestError(errors, 400));
             }
         }
-    }).populate('usuario');
+    });
 });
 
 module.exports = Router;
