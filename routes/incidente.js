@@ -99,7 +99,7 @@ Router.delete('/incidentes/:id', function (req, res) {
 
 Router.route("/incidentes/:id").delete(function(req, res) {
     const id = req.params.id;
-    myteam.remove({ id }, function(err, result) {
+    Incidente.remove({ id }, function(err, result) {
       if (err) {
         console.err(err);
       } else {
