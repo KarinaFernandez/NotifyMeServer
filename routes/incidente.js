@@ -92,7 +92,7 @@ Router.delete('/incidentes/:id', function (req, res, next) {
         if (!err) {
             if (inc) {
                 res.status(200);
-                res.json({eliminado:"true"});
+                res.json("Eliminado")
             }
             else {
                 next(new RestError('recurso no encontrado', 404));
