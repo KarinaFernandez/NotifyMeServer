@@ -86,26 +86,19 @@ Router.put('/incidentes/:id', function (req, res, next) {
 });
 
 // ELIMINAR INCIDENTE por ID
-Router.delete('/incidentes/:id', function (req, res) {
+Router.delete('/incidentes/:id', function (req, res, next) {
     const id = req.params.id;
-    Query = Incidente.findById(id)
-    Query.exec(function (err, inc) {
+    Incidente.findByIdAndDelete(id, function (err, inc) {
         if (!err) {
-            inc.__v = undefined;
-            res.json(inc);
+            if (inc) {
+                res.status(204);
+                res.json();
+            }
+            else {
+                next(new RestError('recurso no encontrado', 404));
+            }
         }
     });
 });
-
-Router.route("/incidentes/:id").delete(function(req, res) {
-    const id = req.params.id;
-    Incidente.remove({ id }, function(err, result) {
-      if (err) {
-        console.err(err);
-      } else {
-        res.json(result);
-      }
-    });
-  });
 
 module.exports = Router;
